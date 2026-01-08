@@ -26,11 +26,3 @@ Despite its flexibility, MongoDB has trade-offs compared to relational databases
 
 Another drawback is the lack of enforced schema and foreign key constraints. While flexibility is an advantage, it also increases the risk of inconsistent or poorly structured data if application-level validations are not carefully implemented. This places greater responsibility on developers to maintain data integrity.
 
----
-
-## Evaluation Criteria Alignment
-
-- **RDBMS limitations (4 marks):** Clear explanation of schema rigidity, joins, and maintenance issues
-- **NoSQL benefits (4 marks):** Accurate use of MongoDB features such as flexible schema, embedded documents, and scalability
-- **Trade-offs (2 marks):** Realistic disadvantages compared to relational databases
-
