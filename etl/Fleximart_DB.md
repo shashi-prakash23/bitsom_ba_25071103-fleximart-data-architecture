@@ -1,3 +1,4 @@
+-- This will create the relevant tables with required column in the SQL SERVER Management Studio
 
 CREATE TABLE dbo.customers (
     customer_id INT PRIMARY KEY IDENTITY(1,1),
