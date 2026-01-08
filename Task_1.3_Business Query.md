@@ -1,4 +1,4 @@
-
+-- this code is on SQL Server Managment Studios
 SELECT
     COALESCE(c.firstname + ' ' + c.lastname, CAST(o.customerid AS NVARCHAR(200))) AS customer_name,
     COALESCE(c.email, CAST(o.customerid AS NVARCHAR(200))) AS email,

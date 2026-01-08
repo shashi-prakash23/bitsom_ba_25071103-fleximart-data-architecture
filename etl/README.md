@@ -49,7 +49,7 @@ The schema is normalized to **Third Normal Form (3NF)**.
 
 ## Technologies Used
 
-- MySQL
+- SQL Server Management Studios
 - Python
 - Pandas
 - SQLAlchemy
