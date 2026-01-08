@@ -11,6 +11,7 @@ CREATE TABLE dbo.customers (
 );
 
 -- Products
+
 CREATE TABLE dbo.products (
     product_id INT PRIMARY KEY IDENTITY(1,1),
     product_name VARCHAR(100) NOT NULL,
@@ -20,6 +21,7 @@ CREATE TABLE dbo.products (
 );
 
 -- Orders
+
 CREATE TABLE dbo.orders (
     order_id INT PRIMARY KEY IDENTITY(1,1),
     customer_id INT NOT NULL,
@@ -31,6 +33,7 @@ CREATE TABLE dbo.orders (
 );
 
 -- Order items
+
 CREATE TABLE dbo.order_items (
     order_item_id INT PRIMARY KEY IDENTITY(1,1),
     order_id  INT NOT NULL,
