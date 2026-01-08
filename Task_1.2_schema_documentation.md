@@ -1,10 +1,10 @@
-# Schema Documentation – Sales Database
+# Schema Documentation – Sales Database (SQL Server)
 
-/* 
-SQL Schema Reference
+/*
+SQL Server Schema Reference
 
 CREATE TABLE customers (
-    customerid INT PRIMARY KEY AUTO_INCREMENT,
+    customerid INT IDENTITY(1,1) PRIMARY KEY,
     firstname VARCHAR(50),
     lastname VARCHAR(50),
     email VARCHAR(100),
@@ -14,7 +14,7 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE products (
-    productid INT PRIMARY KEY AUTO_INCREMENT,
+    productid INT IDENTITY(1,1) PRIMARY KEY,
     productname VARCHAR(100),
     category VARCHAR(50),
     price DECIMAL(10,2),
@@ -22,7 +22,7 @@ CREATE TABLE products (
 );
 
 CREATE TABLE orders (
-    orderid INT PRIMARY KEY AUTO_INCREMENT,
+    orderid INT IDENTITY(1,1) PRIMARY KEY,
     customerid INT,
     orderdate DATE,
     totalamount DECIMAL(10,2),
@@ -31,7 +31,7 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE orderitems (
-    orderitemid INT PRIMARY KEY AUTO_INCREMENT,
+    orderitemid INT IDENTITY(1,1) PRIMARY KEY,
     orderid INT,
     productid INT,
     quantity INT,
@@ -55,7 +55,7 @@ Stores customer master information for individuals who place orders.
 - **customerid**: Unique identifier for each customer (Primary Key)
 - **firstname**: Customer's first name
 - **lastname**: Customer's last name
-- **email**: Customer’s email address (unique)
+- **email**: Customer’s email address
 - **phone**: Contact phone number
 - **city**: City of residence
 - **registration_date**: Date the customer registered
@@ -117,9 +117,12 @@ Stores individual line items for each order.
 
 ## 2. Normalization Explanation (Third Normal Form – 3NF)
 
-The Sales Database is designed in compliance with Third Normal Form (3NF) to ensure data integrity, eliminate redundancy, and prevent anomalies. The design satisfies First Normal Form by ensuring that all attributes contain atomic values and that there are no repeating groups. Second Normal Form is achieved because all non-key attributes are fully dependent on the entire primary key of their respective tables.
+The Sales Database is designed in compliance with Third Normal Form (3NF) to ensure data integrity, eliminate redundancy, and prevent anomalies.
+First Normal Form (1NF) is satisfied because all attributes contain atomic values with no repeating groups.
+Second Normal Form (2NF) is achieved since all non-key attributes are fully dependent on their respective primary keys.
 
-Third Normal Form is satisfied by eliminating transitive dependencies. In the customers table, attributes such as firstname, lastname, email, and city depend solely on customerid. Similarly, product details depend only on productid, and order attributes depend only on orderid. No non-key attribute depends on another non-key attribute.
+Third Normal Form (3NF) is satisfied by eliminating transitive dependencies. Customer attributes depend solely on customerid, product attributes depend solely on productid, and order attributes depend solely on orderid.
+No non-key attribute depends on another non-key attribute.
 
 ### Functional Dependencies
 - customerid → firstname, lastname, email, phone, city, registration_date
@@ -128,48 +131,44 @@ Third Normal Form is satisfied by eliminating transitive dependencies. In the cu
 - orderitemid → orderid, productid, quantity, unitprice, subtotal
 
 ### Avoidance of Anomalies
-- **Update anomalies** are avoided because customer and product data are stored only once.
-- **Insert anomalies** are prevented since customers and products can exist without orders.
-- **Delete anomalies** are avoided because deleting an order does not remove customer or product records.
-
-This normalized structure ensures scalability, consistency, and maintainability.
+- **Update anomalies** are avoided as data is stored only once.
+- **Insert anomalies** are avoided because master data can exist independently.
+- **Delete anomalies** are avoided as deleting transactions does not delete master data.
 
 ---
 
-## 3. Sample Data Representation
+## 3. Sample Data Representation (Using Actual Database Data)
+
+The following SQL Server queries can be executed in SSMS to retrieve **real records** loaded from the original source files.
 
 ### customers
-
-| customerid | firstname | lastname | city   |
-|------------|-----------|----------|--------|
-| 1 | Rahul | Sharma | Delhi |
-| 2 | Anita | Verma | Mumbai |
+```sql
+SELECT TOP 3 *
+FROM customers;
+```
 
 ---
 
 ### products
-
-| productid | productname | category | price |
-|----------|------------|----------|-------|
-| 1 | Laptop | Electronics | 65000 |
-| 2 | Headphones | Accessories | 2500 |
+```sql
+SELECT TOP 3 *
+FROM products;
+```
 
 ---
 
 ### orders
-
-| orderid | customerid | orderdate | totalamount | status |
-|--------|------------|-----------|-------------|--------|
-| 101 | 1 | 2024-06-01 | 67500 | Completed |
-| 102 | 2 | 2024-06-03 | 2500 | Pending |
+```sql
+SELECT TOP 3 *
+FROM orders;
+```
 
 ---
 
 ### orderitems
+```sql
+SELECT TOP 3 *
+FROM orderitems;
+```
 
-| orderitemid | orderid | productid | quantity | subtotal |
-|------------|---------|-----------|----------|----------|
-| 1 | 101 | 1 | 1 | 65000 |
-| 2 | 101 | 2 | 1 | 2500 |
-
-
+---
