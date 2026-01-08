@@ -1,0 +1,11 @@
+##Jupiter Notebook
+
+##python
+## Pyhton library
+	sqlalchemy
+	Pandas
+	NumPy
+	re
+	import
+	unicodedata
+## Microsoft SQL Server Management Studio
